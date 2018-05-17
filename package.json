@@ -1,6 +1,6 @@
 {
   "name": "prettierify",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "mocha **/*.spec.js"
   },
   "bin": {
-    "prettierify": "./bin/prettierify"
+    "prettierify": "./bin/prettierify.js"
   },
   "author": "",
   "license": "ISC",
