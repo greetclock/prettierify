@@ -1,5 +1,5 @@
 {
-  "name": "test-project",
+  "name":       "test-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

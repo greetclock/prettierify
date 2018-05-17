@@ -1,6 +1,6 @@
 {
-  "name": "add-prettier",
-  "version": "0.1.0-beta.0",
+  "name": "prettierify",
+  "version": "0.1.0-beta.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"],
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ],
     "*.ts": [
       "prettier --write",
       "tslint --fix -c ./tslint.json 'src/**/*.ts'",
