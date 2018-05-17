@@ -18,13 +18,13 @@ describe('add-prettier', () => {
   })
 
   afterEach(done => {
-    rimraf(testProjectTemp, done)
+    // rimraf(testProjectTemp, done)
   })
 
   it('Adds new properties to package.json', () => {
     expect(result.scripts.precommit).to.deep.equal('lint-staged')
     expect(result['lint-staged']).to.deep.equal({
-      '*.{js,json,css,md}': ['prettier --write', 'git add'],
+      '*.{js,json,css}': ['prettier --write', 'git add'],
       '*.ts': [
         'prettier --write',
         "tslint --fix -c ./tslint.json 'src/**/*.ts'",

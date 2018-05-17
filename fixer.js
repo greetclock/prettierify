@@ -18,11 +18,7 @@ function addPrettierRc(projectPath = '') {
       throw err
     }
   } else {
-    prettierRc = {
-      semi: false,
-      singleQuote: true,
-      trailingComma: 'all',
-    }
+    prettierRc = {}
   }
 
   let prettierRcStr = JSON.stringify(prettierRc, null, 2)
@@ -38,7 +34,7 @@ exports.run = function(projectPath = '') {
       precommit: 'lint-staged',
     },
     'lint-staged': {
-      '*.{js,json,css,md}': ['prettier --write', 'git add'],
+      '*.{js,json,css}': ['prettier --write', 'git add'],
       '*.ts': [
         'prettier --write',
         "tslint --fix -c ./tslint.json 'src/**/*.ts'",
