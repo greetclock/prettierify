@@ -7,3 +7,7 @@ fixer.run()
 if (!argv.n) {
   fixer.format()
 }
+
+fixer.installDeps().catch(err => {
+  throw err
+})

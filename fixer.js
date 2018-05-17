@@ -4,6 +4,8 @@ let os = require('os')
 let { fromDir } = require('./list-files')
 let prettier = require('prettier')
 let { extname } = require('path')
+let npm = require('npm')
+let { promisify } = require('util')
 
 function addPrettierRc(projectPath = '') {
   let globalPrettierRcStr
@@ -58,6 +60,11 @@ function format(projectPath = './') {
   }
 }
 
+async function installDeps() {
+  await promisify(npm.load)({ loaded: false, 'save-dev': true })
+  return promisify(npm.commands.install)(['husky', 'prettier', 'lint-staged'])
+}
+
 function run(projectPath = '') {
   let filepath = projectPath + 'package.json'
 
@@ -94,3 +101,4 @@ function run(projectPath = '') {
 exports.addPrettierRc = addPrettierRc
 exports.run = run
 exports.format = format
+exports.installDeps = installDeps
