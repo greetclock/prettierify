@@ -10,7 +10,12 @@ function inIgnoreList(name, ignoreList) {
   return false
 }
 
-function fromDir(startPath, filter, found = [], ignoreDirs = [/node_modules/]) {
+function fromDir(
+  startPath,
+  filter = /\.(js|json|ts)$/,
+  found = [],
+  ignoreDirs = [/node_modules/],
+) {
   if (!fs.existsSync(startPath)) {
     return []
   }

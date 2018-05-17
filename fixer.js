@@ -1,6 +1,9 @@
 let fs = require('fs')
 let { merge } = require('lodash')
 let os = require('os')
+let { fromDir } = require('./list-files')
+let prettier = require('prettier')
+let { extname } = require('path')
 
 function addPrettierRc(projectPath = '') {
   let globalPrettierRcStr
@@ -26,7 +29,36 @@ function addPrettierRc(projectPath = '') {
   fs.writeFileSync(filepath, prettierRcStr)
 }
 
-exports.run = function(projectPath = '') {
+function getPrettierRc() {
+  let prc
+  try {
+    let prcStr = fs.readFileSync('./.prettierrc', { encoding: 'utf8' })
+    prc = JSON.parse(prcStr)
+  } catch (err) {
+    throw err
+  }
+
+  return prc
+}
+
+function format(projectPath = './') {
+  let files = fromDir(projectPath)
+  for (let filename of files) {
+    let content = fs.readFileSync(filename, { encoding: 'utf8' })
+    let parser = {
+      '.js': 'babylon',
+      '.ts': 'typescript',
+      '.json': 'json',
+    }
+    let res = prettier.format(content, {
+      parser: parser[extname(filename)],
+      ...getPrettierRc(),
+    })
+    fs.writeFileSync(filename, res)
+  }
+}
+
+function run(projectPath = '') {
   let filepath = projectPath + 'package.json'
 
   let packageMerge = {
@@ -60,3 +92,5 @@ exports.run = function(projectPath = '') {
 }
 
 exports.addPrettierRc = addPrettierRc
+exports.run = run
+exports.format = format
