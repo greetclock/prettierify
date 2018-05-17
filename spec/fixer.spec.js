@@ -2,11 +2,11 @@ let ncp = require('ncp').ncp
 let rimraf = require('rimraf')
 let { expect } = require('chai')
 let fs = require('fs')
-let fixer = require('./fixer')
+let fixer = require('../fixer')
 
 let testProjectTemp = 'test-project-temp'
 
-describe('add-prettier', () => {
+describe('fixer.js', () => {
   let initial
   let result
   beforeEach(done => {
@@ -18,7 +18,7 @@ describe('add-prettier', () => {
   })
 
   afterEach(done => {
-    // rimraf(testProjectTemp, done)
+    rimraf(testProjectTemp, done)
   })
 
   it('Adds new properties to package.json', () => {
