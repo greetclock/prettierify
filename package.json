@@ -1,19 +1,23 @@
 {
   "name": "prettierify",
-  "version": "0.1.0-beta.3",
+  "version": "0.1.0-beta.4",
   "description": "",
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
     "test": "mocha **/*.spec.js"
   },
+  "preferGlobal": true,
   "bin": {
     "prettierify": "./bin/prettierify.js"
   },
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"],
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ],
     "*.ts": [
       "prettier --write",
       "tslint --fix -c ./tslint.json 'src/**/*.ts'",
